@@ -1,0 +1,46 @@
+$(function () {
+    $(".form-horizontal").validate({
+        rules:{
+            uname:{
+                required:true,
+                minlength:5,
+                remote:{
+                    url:"/project/mvcDemo/index.php/admin/reg/checkName",
+                    type:"post",
+                    data:{
+                        uname:function () {
+                            return $("input[name=uname]").val()
+                        }
+                    }
+                }
+            },
+            pass:{
+                required:true,
+                rangelength:[5,10],
+                equalTo:"#lastname1"
+            },
+            pass1:{
+                required:true,
+                rangelength:[5,10],
+                equalTo:"#lastname"
+            }
+        },
+        messages:{
+            uname:{
+                required:"用户名必填",
+                minlength:"请输入至少5位",
+                remote:"用户名已经存在"
+            },
+            pass:{
+                required:"密码没有填写",
+                rangelength:"密码长度应为5~10位之间",
+                equalTo:"两次密码输入不一致"
+            },
+            pass1:{
+                required:"密码没有再次填写",
+                rangelength:"密码长度应为5~10位之间",
+                equalTo:"两次密码输入不一致"
+            }
+        }
+    })
+})
